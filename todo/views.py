@@ -15,8 +15,10 @@ class HomeView(ListView):
         
         if self.request.GET.get('title'):
             context['detail']=TodoModel.objects.get(id=self.request.GET.get('title'))
-            
-            
+        elif self.request.GET.get('detailid'):
+            update=TodoModel.objects.get(id=self.request.GET.get('detailid'))
+            update.content=self.request.GET.get('textarea')
+            context['detail']=update
         return context
     
       

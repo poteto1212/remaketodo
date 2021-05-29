@@ -36,6 +36,8 @@
             <div id=item2>
                 <h2>簡易編集フォーム</h2>
                 <form method="GET" action="{% url 'home' %}">
+                    {% csrf_token %} 
+                    <input type="hidden" name=detailid value="{{detail.id}}">
                     <textarea name=textarea  style="width:100%;height:140px;">{{detail.content}}</textarea><br>
                     <input type="submit" value="送信">
                 </form>
