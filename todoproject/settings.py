@@ -25,7 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
     'todo',
+    'dbbackup',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins':[
+                'bootstrap4.templatetags.bootstrap4',#bootstrap4のHTMLタグを有効化する
+                ]
         },
     },
 ]
@@ -115,3 +120,7 @@ STATIC_URL = '/static/'#画像配信限のURL
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
 STATICFILES_STRAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#バックアップ関連設定
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, 'backups')}
