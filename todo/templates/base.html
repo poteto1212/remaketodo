@@ -1,27 +1,27 @@
 {% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
 <html>
-    <head>
-        <title>ToDoリスト</title>
-    </head>
+    <title>メモ</title>
+    <header>
+        <h1>
+            {% block header %}
+            {% endblock header %}
+        </h1>
+        <nav class="pc-nav">
+            <ul>
+                <li><a href='{% url "home" %}'>ホーム画面</a></li>
+                <li><a href='{% url "list" %}'>todo一覧</a></li>
+            </ul>
+        </nav>
+    </header>
     <body>
-        <header class='headstyle'>
-        <div class='header'>
-        {% block header %}
-        {% endblock header %}
-        <ul class='route'>
-            <li><a href='{% url "list" %}'>一覧画面へ</a></li>
-            <li><a href='{% url "home" %}'>ホーム画面に戻る</a></li>
-        </ul>
-        </div>
-        </header>
-        <div class='main'>
         {% block content %}
-        {% endblock content %}
-        </div>
-        <div class='footer'>
-            <p></p>
-        </div>
-        
+        {% endblock content%}
     </body>
+    <footer>
+    <footer>
 </html>
