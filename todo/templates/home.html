@@ -21,16 +21,26 @@
         </form>
     </div>
     <div id="itemB">
-        
-        <h1>タイトル</h1>
-        <strong>{{detail.title}}</strong>
-        {% if detail.id %}
-        <ul id="headlists">
-            <li class="headlist"><a href='{% url "detail" detail.id %}'>詳細画面へ</a></li><!--list.pkでリンクのpkを自動取得できる-->
-            <li class="headlist"><a href='{% url "update" detail.id %}'>編集画面へ</a></li>
-            <li class="headlist"><a href='{% url "delete" detail.id %}'>削除画面へ</a></li>
-        {% endif %}
-        </ul>
+        <div id="subcontainer">
+            <div id='item1'>
+                <h1>タイトル</h1>
+                <strong>{{detail.title}}</strong>
+                {% if detail.id %}
+                <ul>
+                    <li><a href='{% url "detail" detail.id %}'>詳細画面へ</a></li><!--list.pkでリンクのpkを自動取得できる-->
+                    <li><a href='{% url "update" detail.id %}'>編集画面へ</a></li>
+                    <li><a href='{% url "delete" detail.id %}'>削除画面へ</a></li>
+                </ul>
+                {% endif %}
+            </div>
+            <div id=item2>
+                <h2>簡易編集フォーム</h2>
+                <form method="GET" action="{% url 'home' %}">
+                    <textarea name=textarea  style="width:100%;height:140px;">{{detail.content}}</textarea><br>
+                    <input type="submit" value="送信">
+                </form>
+            </div>
+        </div>
     </div>
     <div id="itemC">
         <h5>詳細</h5>

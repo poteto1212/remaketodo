@@ -8,5 +8,4 @@ urlpatterns=[
     path('create/',TodoCreateView.as_view(),name='create'),
     path('delete/<int:pk>/',TodoDelete.as_view(),name='delete'),
     path('update/<int:pk>/',TodoUpdateView.as_view(),name='update')
-    
     ]
