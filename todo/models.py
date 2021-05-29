@@ -9,4 +9,6 @@ class TodoModel(models.Model):
         'auth.User',
         on_delete=models.CASCADE
         )
+        
+    category=models.CharField(max_length=50,blank=True,null=True)
 # Create your models here.

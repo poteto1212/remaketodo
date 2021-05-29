@@ -15,9 +15,9 @@
             {% endblock header %}
         </h1>
         <nav class="pc-nav">
-            <ul>
-                <li><a href='{% url "home" %}'>ホーム画面</a></li>
-                <li><a href='{% url "list" %}'>todo一覧</a></li>
+            <ul id="headlists">
+                <li class="headlist"><a href='{% url "home" %}'>ホーム画面</a></li>
+                <li class="headlist"><a href='{% url "list" %}'>メモ一覧</a></li>
             </ul>
         </nav>
     </header>

@@ -7,11 +7,36 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <div id="container">
-    <div id="itemA">メモのリスト</div>
-    <div id="itemB">タイトル</div>
-    <div id="itemC">詳細</div>
+    <div id="itemA">
+        <form method="GET" action="{% url 'home' %}">
+        <h4>メモのリスト</h4>
+        <ul>
+            {% for list  in lists %}
+            <li>
+                {{list.title}}
+                <button type="submit" name='title' value="{{list.id}}">表示</button>
+            </li>
+            {% endfor %}
+        </ul>
+        </form>
+    </div>
+    <div id="itemB">
+        
+        <h1>タイトル</h1>
+        <strong>{{detail.title}}</strong>
+        {% if detail.id %}
+        <ul id="headlists">
+            <li class="headlist"><a href='{% url "detail" detail.id %}'>詳細画面へ</a></li><!--list.pkでリンクのpkを自動取得できる-->
+            <li class="headlist"><a href='{% url "update" detail.id %}'>編集画面へ</a></li>
+            <li class="headlist"><a href='{% url "delete" detail.id %}'>削除画面へ</a></li>
+        {% endif %}
+        </ul>
+    </div>
+    <div id="itemC">
+        <h5>詳細</h5>
+        {{detail.content|linebreaksbr}}
+    </div>
+    
 </div>
-<div class="backtodo" style="background-img: url(static/css/todohome.jpg);">
-    <img src="{% static 'css/todohome.jpg' %}">
-</div>
+
 {% endblock content %}

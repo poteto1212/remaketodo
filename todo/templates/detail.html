@@ -6,7 +6,7 @@
 
 {% block content %}
 <p>タイトル：{{object.title}}</p>
-<p>Todoの内容：{{object.content|linebreaksbr}}</p>
+<p>内容：{{object.content|linebreaksbr}}</p>
 <p>科目:{{object.pic}}</p>
 
 <a href='{% url "list" %}'>一覧に戻る</a>

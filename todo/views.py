@@ -4,8 +4,19 @@ from django.views.generic import ListView,DetailView,CreateView,DeleteView,Updat
 from django.urls import reverse_lazy,reverse
 from django.db.models import Max
 
-def home(request):
-    return render(request,'home.html')
+class HomeView(ListView):
+    model=TodoModel
+    template_name='home.html'
+    
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['lists']=TodoModel.objects.order_by('category','id')
+        
+        
+        if self.request.GET.get('title'):
+            context['detail']=TodoModel.objects.get(id=self.request.GET.get('title'))
+            
+        return context
     
 class TodoView(ListView):
     model=TodoModel
