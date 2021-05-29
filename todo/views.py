@@ -16,7 +16,11 @@ class HomeView(ListView):
         if self.request.GET.get('title'):
             context['detail']=TodoModel.objects.get(id=self.request.GET.get('title'))
             
+            
         return context
+    
+      
+        
     
 class TodoView(ListView):
     model=TodoModel
