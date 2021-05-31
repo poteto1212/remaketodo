@@ -8,17 +8,16 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <div id="container">
     <div id="itemA">
-        <form method="GET" action="{% url 'home' %}">
+              {% csrf_token %}
         <h4>メモのリスト</h4>
         <ul>
             {% for list  in lists %}
             <li>
                 {{list.title}}
-                <button type="submit" name='title' value="{{list.id}}">表示</button>
+                <button type="submit" name='title' value="{{list.id}}" onclick="location.href='{% url 'homeupdate' list.pk %}'">表示</button>
             </li>
             {% endfor %}
         </ul>
-        </form>
     </div>
     <div id="itemB">
         <div id="subcontainer">
@@ -35,11 +34,10 @@
             </div>
             <div id=item2>
                 <h2>簡易編集フォーム</h2>
-                <form method="GET" action="{% url 'home' %}">
+                <form method=POST action="{% url 'homeupdate' detail.pk %}">
                     {% csrf_token %} 
-                    <input type="hidden" name=detailid value="{{detail.id}}">
-                    <textarea name=textarea  style="width:100%;height:140px;">{{detail.content}}</textarea><br>
-                    <input type="submit" value="送信">
+                    {{form.as_p}}
+                    <input type='submit' value='修正'>
                 </form>
             </div>
         </div>

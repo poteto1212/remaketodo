@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .models import TodoModel
-from django.views.generic import ListView,DetailView,CreateView,DeleteView,UpdateView
+from django.views.generic import ListView,DetailView,CreateView,DeleteView,UpdateView,FormView
 from django.urls import reverse_lazy,reverse
 from django.db.models import Max
+from django.http import HttpResponseRedirect
 
 class HomeView(ListView):
     model=TodoModel
@@ -11,19 +12,23 @@ class HomeView(ListView):
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         context['lists']=TodoModel.objects.order_by('category','id')
+        context['detail']=TodoModel.objects.all()[0]
         
-        
-        if self.request.GET.get('title'):
-            context['detail']=TodoModel.objects.get(id=self.request.GET.get('title'))
-        elif self.request.GET.get('detailid'):
-            update=TodoModel.objects.get(id=self.request.GET.get('detailid'))
-            update.content=self.request.GET.get('textarea')
-            update.save()
-            context['detail']=update
         return context
+
+class HomeUpdate(UpdateView):
+    model=TodoModel
+    template_name='home.html'
+    fields=['content']
     
-      
-        
+    def get_success_url(self):
+        todo_id=self.kwargs['pk']
+        return reverse('homeupdate',kwargs={'pk':todo_id})
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['lists']=TodoModel.objects.order_by('category','id')
+        context['detail']=TodoModel.objects.get(id=self.kwargs['pk'])
+        return context
     
 class TodoView(ListView):
     model=TodoModel
